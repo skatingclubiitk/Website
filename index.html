@@ -1,0 +1,1400 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Skating Club - IIT Kanpur</title>
+  <link rel="icon" type="image/png" href="./favicon/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="./favicon/favicon.svg" />
+  <link rel="shortcut icon" href="./favicon/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png" />
+  <link rel="manifest" href="./favicon/site.webmanifest" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+
+    :root {
+      --bg: #10151C;
+      --bg-alt: #161D26;
+      --ink: #EDEFF2;
+      --ink-dim: #8A94A3;
+      --cyan: #6FE7DA;
+      --amber: #F2A342;
+      --line: rgba(237, 239, 242, 0.10);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+
+  body {
+  background-color: #10151C;
+  background-image: radial-gradient(circle at 50% 0%, rgba(111, 231, 218, 0.06), transparent 60%);
+  color: var(--ink);
+  font-family: 'Inter', sans-serif;
+  line-height: 1.6;
+  overflow-x: hidden;
+    }
+
+    h1,
+    h2,
+    h3,
+    .display {
+      font-family: 'Rajdhani', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      font-weight: 700;
+      line-height: 1.05;
+    }
+
+    .mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    .wrap {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+
+    section {
+      position: relative;
+      padding: 120px 0;
+    }
+
+    @media (max-width:720px) {
+      section {
+        padding: 80px 0;
+      }
+
+      .wrap {
+        padding: 0 20px;
+      }
+    }
+
+    .eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--amber);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .eyebrow::before {
+      content: '';
+      width: 22px;
+      height: 2px;
+      background: var(--amber);
+      display: inline-block;
+    }
+
+    /* ---------- Speed-trail signature element ---------- */
+    .trail {
+      position: absolute;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--cyan) 30%, var(--amber) 70%, transparent);
+      opacity: 0.55;
+      filter: blur(0.3px);
+      pointer-events: none;
+    }
+
+    .trail-divider {
+      position: relative;
+      height: 64px;
+      overflow: hidden;
+      margin: 0 auto;
+    }
+
+    .trail-divider svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .trail-divider .streak {
+      stroke-dasharray: 240 900;
+      stroke-dashoffset: 1140;
+      animation: streak-run 2.6s ease-out forwards;
+    }
+
+    @keyframes streak-run {
+      to {
+        stroke-dashoffset: 0;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .trail-divider .streak {
+        animation: none;
+        stroke-dashoffset: 0;
+      }
+    }
+
+    /* ---------- Nav ---------- */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(16, 21, 28, 0.82);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav-inner {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0 32px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 700;
+      font-size: 22px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      background: linear-gradient(90deg, var(--cyan), var(--amber));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .logo:hover {
+      opacity: 0.8;
+      transform: scale(1.02);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 30px;
+      font-size: 13px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+
+    .nav-links a {
+      color: var(--ink-dim);
+      transition: color .2s;
+      position: relative;
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus-visible {
+      color: var(--cyan);
+      outline: none;
+    }
+
+    .nav-links a:focus-visible {
+      outline: 2px solid var(--cyan);
+      outline-offset: 4px;
+      border-radius: 2px;
+    }
+
+    @media (max-width:820px) {
+      .nav-links {
+        display: none;
+      }
+    }
+
+    .nav-links .nav-btn {
+      background: var(--cyan);
+      color: var(--bg);
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      font-size: 13px;
+      padding: 8px 18px;
+      border-radius: 20px;
+      border: none;
+      cursor: pointer;
+      transition: transform .2s, box-shadow .2s;
+      margin-left: 10px;
+      display: inline-block;
+      text-decoration: none;
+    }
+    
+    .nav-links .nav-btn:hover {
+      color:white;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(111, 231, 218, 0.3);
+    }
+
+    /* ---------- Hero ---------- */
+    .hero {
+      height: 100vh;
+      min-height: 640px;
+      display: flex;
+      align-items: flex-end;
+      position: relative;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center 30%;
+    }
+
+    .hero-scrim {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(16, 21, 28, 0.55) 0%, rgba(16, 21, 28, 0.35) 35%, rgba(16, 21, 28, 0.96) 92%),
+        linear-gradient(90deg, rgba(16, 21, 28, 0.6) 0%, transparent 45%);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 0 32px 76px;
+      max-width: 1160px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .hero h1 {
+      font-size: clamp(48px, 8.4vw, 118px);
+      color: var(--ink);
+    }
+
+    .hero h1 .accent {
+      color: var(--cyan);
+    }
+
+    .hero p.tagline {
+      max-width: 560px;
+      color: var(--ink-dim);
+      font-size: 17px;
+      margin-top: 22px;
+    }
+
+    .hero-meta {
+      display: flex;
+      gap: 34px;
+      margin-top: 44px;
+      flex-wrap: wrap;
+    }
+
+    .hero-meta div {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--ink-dim);
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+
+    .hero-meta strong {
+      display: block;
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 26px;
+      color: var(--ink);
+      font-weight: 600;
+      letter-spacing: 0;
+      text-transform: none;
+    }
+
+    .scroll-cue {
+      position: absolute;
+      right: 32px;
+      bottom: 36px;
+      z-index: 2;
+      writing-mode: vertical-rl;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--ink-dim);
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .scroll-cue::after {
+      content: '';
+      width: 1px;
+      height: 40px;
+      background: var(--ink-dim);
+      display: block;
+    }
+
+    @media (max-width:720px) {
+      .scroll-cue {
+        display: none;
+      }
+    }
+
+    /* ---------- Vision ---------- */
+    .vision-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 64px;
+      align-items: start;
+    }
+
+    @media (max-width:860px) {
+      .vision-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .vision-grid h2 {
+      font-size: clamp(32px, 4vw, 46px);
+      margin-bottom: 22px;
+    }
+
+    .vision-grid p {
+      color: var(--ink-dim);
+      font-size: 16px;
+      max-width: 52ch;
+    }
+
+    .stat-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .stat-list div {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--line);
+      font-size: 14px;
+      color: var(--ink-dim);
+    }
+
+    .stat-list .num {
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--cyan);
+      font-size: 13px;
+    }
+
+    /* ---------- Programs / schedule board ---------- */
+    .board {
+      background: var(--bg-alt);
+      border: 1px solid var(--line);
+      border-radius: 4px;
+    }
+
+    .board-row {
+      display: grid;
+      grid-template-columns: 150px 1fr 1fr;
+      gap: 24px;
+      padding: 26px 30px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .board-row:last-child {
+      border-bottom: none;
+    }
+
+    .board-row .time {
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--amber);
+      font-size: 13px;
+    }
+
+    .board-row h3 {
+      font-size: 20px;
+      letter-spacing: 0.01em;
+      margin-bottom: 6px;
+    }
+
+    .board-row p {
+      color: var(--ink-dim);
+      font-size: 14px;
+    }
+
+    @media (max-width:720px) {
+      .board-row {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+    }
+
+  
+
+    /* ---------- Events ---------- */
+    .events-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+    }
+
+    @media (max-width:860px) {
+      .events-wrap {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      padding: 8px 14px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--ink-dim);
+    }
+
+    .tag.hot {
+      border-color: var(--amber);
+      color: var(--amber);
+    }
+
+    /* ---------- Timeline (real sequence -> numbering justified) ---------- */
+    .timeline {
+      position: relative;
+      padding-left: 2px;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 78px;
+      top: 6px;
+      bottom: 6px;
+      width: 1px;
+      background: var(--line);
+    }
+
+    .t-row {
+      display: grid;
+      grid-template-columns: 78px 1fr;
+      gap: 28px;
+      padding: 22px 0;
+      position: relative;
+    }
+
+    .t-row .month {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--cyan);
+      text-transform: uppercase;
+      letter-spacing: .06em;
+    }
+
+    .t-row .dot {
+      position: absolute;
+      left: 74px;
+      top: 28px;
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--amber);
+    }
+
+    .t-row h4 {
+      font-size: 16px;
+      font-weight: 600;
+      font-family: 'Inter', sans-serif;
+      text-transform: none;
+      margin-bottom: 4px;
+    }
+
+    .t-row p {
+      font-size: 13.5px;
+      color: var(--ink-dim);
+    }
+
+    @media (max-width:600px) {
+      .timeline::before {
+        left: 58px;
+      }
+
+      .t-row {
+        grid-template-columns: 58px 1fr;
+        gap: 18px;
+      }
+
+      .t-row .dot {
+        left: 54px;
+      }
+    }
+
+    /* ---------- Safety ---------- */
+    .safety-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    @media (max-width:860px) {
+      .safety-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width:560px) {
+      .safety-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .safety-item {
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      padding: 22px 20px;
+      font-size: 14px;
+      color: var(--ink-dim);
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+
+    .safety-item .mark {
+      color: var(--cyan);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      flex-shrink: 0;
+    }
+
+    /* ---------- Gallery Marquee ---------- */
+    .marquee-wrapper {
+      display: flex;
+      overflow: hidden;
+      gap: 20px;
+      width: 100%;
+    }
+
+    .marquee-group {
+      display: flex;
+      gap: 20px;
+      animation: scroll-x 35s linear infinite;
+      min-width: 100%;
+      flex-shrink: 0;
+    }
+
+    .marquee-wrapper:hover .marquee-group {
+      animation-play-state: paused;
+    }
+
+    .marquee-group img {
+      height: 400px;
+      width: auto;
+      object-fit: cover;
+      border-radius: 8px;
+      flex-shrink: 0;
+      filter: saturate(1.05);
+    }
+
+    @keyframes scroll-x {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(calc(-100% - 20px)); }
+    }
+
+    @media (max-width:720px) {
+      .marquee-group img {
+        height: 260px;
+      }
+    }
+
+    /* ---------- Contact ---------- */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1px;
+      background: var(--line);
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    @media (max-width:600px) {
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .contact-card {
+      background: var(--bg);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      cursor:pointer;
+    }
+
+    .contact-img {
+      width: 100%;
+      height: 280px;
+      border-radius: 6px;
+      object-fit: contain;
+      object-position: center;
+      background: var(--bg-alt);
+      margin-bottom: 20px;
+      border: 1px solid var(--line);
+      transition: transform 0.3s ease;
+    }
+
+    .contact-img:hover {
+      transform: scale(1.1);
+    }
+
+    .contact-card h4 {
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 15px;
+      text-transform: none;
+      margin-bottom: 6px;
+    }
+
+    .contact-card .num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      color: var(--cyan);
+    }
+
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 40px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 12px;
+      color: var(--ink-dim);
+      font-family: 'JetBrains Mono', monospace;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+    }
+
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--cyan);
+      color: var(--bg);
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      font-size: 14px;
+      padding: 14px 26px;
+      border-radius: 2px;
+      margin-top: 36px;
+      transition: transform .2s, box-shadow .2s;
+    }
+
+    .cta-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(111, 231, 218, 0.25);
+    }
+.footer-bottom{
+    text-align:center;
+    padding:30px 0;
+}
+
+.footer-bottom p{
+    margin:8px 0;
+}
+
+.footer-bottom a{
+    color:var(--cyan);
+    text-decoration:none;
+}
+
+.developer-credit{
+    margin-top:18px;
+    padding-top:18px;
+    border-top:1px solid rgba(255,255,255,.08);
+    color:#9ca3af;
+}
+
+.developer-credit span{
+    color:var(--cyan);
+    font-weight:700;
+}
+   /* Coordinator Contact Icons */
+.contact-icons{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:15px;
+    margin-top:12px;
+}
+
+.contact-icons a{
+    width:42px;
+    height:42px;
+    border:1px solid rgba(255,255,255,.15);
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:var(--cyan);
+    text-decoration:none;
+    font-size:18px;
+    transition:all .3s ease;
+}
+
+.contact-icons a:hover{
+    background:var(--cyan);
+    color:#111;
+    transform:translateY(-3px);
+    box-shadow:0 0 12px rgba(0,255,255,.4);
+} 
+    /* Center the last coordinator */
+.center-card{
+    grid-column:1 / -1;
+    justify-self:center;
+    max-width:340px;
+    width:100%;
+}
+
+ 
+    /* ===========================
+   SOCIAL MEDIA SECTION
+=========================== */
+
+.social-section{
+    padding:70px 0;
+    text-align:center;
+}
+
+.social-section h2{
+    margin:10px 0 15px;
+    font-size:clamp(30px,4vw,44px);
+}
+
+.social-text{
+    max-width:650px;
+    margin:0 auto 35px;
+    color:#b6bfd1;
+    font-size:17px;
+}
+
+.social-icons{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:22px;
+    flex-wrap:wrap;
+}
+
+.social-icons a{
+    width:60px;
+    height:60px;
+    border-radius:50%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-decoration:none;
+    color:var(--cyan);
+    border:1px solid rgba(255,255,255,.15);
+    font-size:24px;
+    transition:.3s;
+}
+
+.social-icons a:hover{
+    background:var(--cyan);
+    color:#111;
+    transform:translateY(-5px);
+    box-shadow:0 0 18px rgba(0,255,255,.35);
+}
+    /* ---------- Achievements ---------- */
+
+.achievement-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:22px;
+}
+
+.achievement-card{
+    background:var(--bg-alt);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:36px 28px;
+    transition:.35s;
+    position:relative;
+    overflow:hidden;
+}
+
+.achievement-card:hover{
+    transform:translateY(-8px);
+    border-color:var(--cyan);
+}
+
+.achievement-card::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:3px;
+    background:linear-gradient(90deg,var(--cyan),var(--amber));
+}
+
+.achievement-card .number{
+    display:block;
+    font-family:'Rajdhani',sans-serif;
+    font-size:54px;
+    font-weight:700;
+    color:var(--cyan);
+    line-height:1;
+    margin-bottom:14px;
+}
+
+.achievement-card h3{
+    font-size:22px;
+    margin-bottom:10px;
+}
+
+.achievement-card p{
+    color:var(--ink-dim);
+    font-size:14px;
+}
+
+@media(max-width:900px){
+    .achievement-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+@media(max-width:600px){
+    .achievement-grid{
+        grid-template-columns:1fr;
+    }
+}
+    /* ---------- FAQ ---------- */
+
+.faq-container{
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+}
+
+.faq-item{
+    background:var(--bg-alt);
+    border:1px solid var(--line);
+    border-radius:8px;
+    overflow:hidden;
+    transition:.3s;
+}
+
+.faq-item:hover{
+    border-color:var(--cyan);
+}
+
+.faq-item summary{
+    list-style:none;
+    cursor:pointer;
+    padding:22px 28px;
+    font-family:'Rajdhani',sans-serif;
+    font-size:22px;
+    font-weight:700;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.faq-item summary::-webkit-details-marker{
+    display:none;
+}
+
+.faq-item summary::after{
+    content:"+";
+    color:var(--cyan);
+    font-size:26px;
+    transition:.3s;
+}
+
+.faq-item[open] summary::after{
+    content:"–";
+}
+
+.faq-item p{
+    padding:0 28px 22px;
+    color:var(--ink-dim);
+    font-size:15px;
+    line-height:1.7;
+}
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+  <script src="poster-popup.js"></script>
+<body>
+
+   
+  <div class="nav-inner">
+    <div class="logo">Skating Club IIT Kanpur</div>
+    <div class="nav-links">
+      <a href="#about">About us</a>
+      <a href="#programs">Programs</a>
+      <a href="#events">Events</a>
+      <a href="#safety">Safety</a>
+         <a href="#faq">FAQs</a>
+      <a href="#contact">Contact</a>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSe_FhRtgqFaaP1GMR4l_hXzSln35jx-vtIZzzv-jVssjx57Dw/viewform?usp=header" class="nav-btn" target="_blank" rel="noopener noreferrer">Join Now</a>
+    </div>
+  </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="hero-bg" style="background-image:url('./assets/night-skating-1.jpg')"></div>
+    <div class="hero-scrim"></div>
+    <div class="hero-content">
+      <h1>Every Session<br>Builds <span class="accent">Speed.</span></h1>
+      <p class="tagline">An inclusive, energetic skating community — from first push-off to competitive Speed Skating,
+        Roller Hockey, Skateboarding and Waveboarding.</p>
+      <div class="hero-meta">
+         
+      </div>
+       
+    </div>
+    <div class="scroll-cue">Scroll</div>
+  </header>
+
+  <!-- About us -->
+  <section id="vision">
+    <div class="wrap vision-grid">
+      <div>
+        <div class="eyebrow">About us</div>
+        <h2>FROM FIRST GLIDE<br>TO FEARLESS RIDES.</h2>
+        <p>The Skating Club at IIT Kanpur is where passion meets progress.
+          Whether you're stepping onto skates for the very first time or aiming to master advanced techniques,
+          every journey begins with expert coaching and a supportive team.
+          Through structured training, daily practice sessions,
+          exciting workshops, and thrilling competitions,
+          we transform beginners into confident skaters and teammates into lifelong friends.
+          Here, every fall is a lesson, every lap is progress, and every achievement is celebrated together.</p>
+      </div>
+      <div class="stat-list">
+        <div><span>Learn from experienced coaches, one step at a time</span><span class="num">01</span></div>
+        <div><span>Master balance, speed, technique, and confidence</span><span class="num">02</span></div>
+        <div><span>Train daily with fun, structured practice sessions</span><span class="num">03</span></div>
+        <div><span>Showcase your skills in exciting campus competitions</span><span class="num">04</span></div>
+        <div><span>Build fitness, endurance, discipline, and agility through skating</span><span class="num">05</span></div>
+          <div><span>Join a vibrant community, forge lifelong friendships, and create unforgettable memories</span><span class="num">06</span></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="trail-divider">
+    <svg viewBox="0 0 1160 64" preserveAspectRatio="none">
+      <line class="streak" x1="0" y1="32" x2="1160" y2="32" stroke="url(#g1)" stroke-width="2" />
+      <defs>
+        <linearGradient id="g1" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#10151C" stop-opacity="0" />
+          <stop offset="35%" stop-color="#6FE7DA" />
+          <stop offset="70%" stop-color="#F2A342" />
+          <stop offset="100%" stop-color="#10151C" stop-opacity="0" />
+        </linearGradient>
+      </defs>
+    </svg>
+  </div>
+<!-- ACHIEVEMENTS -->
+<section id="achievements">
+  <div class="wrap">
+    <div class="eyebrow">Achievements</div>
+
+    <h2 style="font-size:clamp(32px,4vw,46px); margin-bottom:18px;">
+      BUILDING SKATERS.<br>
+      BUILDING A COMMUNITY.
+    </h2>
+
+    <p style="max-width:650px;color:var(--ink-dim);margin-bottom:50px;">
+      Over the years, the Skating Club has grown into one of IIT Kanpur's most active student clubs,
+      introducing hundreds of students to skating through workshops, coaching sessions, competitions,
+      and community events.
+    </p>
+
+    <div class="achievement-grid">
+
+      <div class="achievement-card">
+        <span class="number">300+</span>
+        <h3>Active Members</h3>
+        <p>A growing community of enthusiastic skaters from across IIT Kanpur.</p>
+      </div>
+
+      <div class="achievement-card">
+        <span class="number">160+</span>
+        <h3>Summer Camp Participants</h3>
+        <p>Students trained during our annual Summer Skating Camp.</p>
+      </div>
+
+      <div class="achievement-card">
+        <span class="number">6</span>
+        <h3>Practice Days</h3>
+        <p>Regular evening sessions conducted every week.</p>
+      </div>
+
+      <div class="achievement-card">
+        <span class="number">4</span>
+        <h3>Skating Disciplines</h3>
+        <p>Speed Skating, Roller Hockey, Skateboarding and Waveboarding.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+  
+  <!-- PROGRAMS -->
+<section id="programs">
+  <div class="wrap">
+    <div class="eyebrow">Programs</div> 
+    <h2 style="font-size:clamp(32px,4vw,46px); margin-bottom:44px;">The rink, on a schedule.</h2>
+    <p style="color:var(--ink-dim); margin-bottom:32px;">
+      <strong style="color:var(--cyan);">Venue:</strong> Skating Rink, Old Sports Complex, IIT Kanpur
+    </p>
+
+      <div class="board">
+        <div class="board-row">
+          <div class="time">6:30 – 8:00 PM<br>Mon – Sat</div>
+          <div>
+            <h3>Summer Camp</h3>
+            <p>A structured one-month program before term starts, for beginners and intermediates.</p>
+          </div>
+          <p>Balance, coordination, posture and speed development, with weekly competitions and progress tracking built
+            in.</p>
+        </div>
+        <div class="board-row">
+          <div class="time">7:00 – 8:00 PM<br>Mon – Sat</div>
+          <div>
+            <h3>Daily Rink Sessions</h3>
+            <p>Ongoing practice for every skill level, all year.</p>
+          </div>
+          <p>Skate issuance, guided and independent practice, plus a dedicated Freshers' week of orientation and safety
+            basics.</p>
+        </div>
+        <div class="board-row">
+          <div class="time">August • October • February/March</div>
+          <div>
+            <h3>Special Coaching Workshops</h3>
+            <p>Professional coaching, run three times a year.</p>
+          </div>
+          <p>Split by PG Freshers, UG Freshers, and Open category — focused on technique, speed, and competition prep.
+          </p>
+        </div>
+        <div class="board-row">
+          <div class="time">Ongoing</div>
+          <div>
+            <h3>Skill Development</h3>
+            <p>Branching out across disciplines.</p>
+          </div>
+          <p>Speed skating, skateboarding and waveboarding sessions, plus roller hockey introductions and skate
+            maintenance training.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- EVENTS -->
+  <section id="events">
+    <div class="wrap events-wrap">
+      <div>
+        <div class="eyebrow">Competitions</div>
+        <h2 style="font-size:clamp(28px,3.6vw,38px);">Last Saturday,<br>every month.</h2>
+        <p style="color:var(--ink-dim); margin-top:18px; max-width:46ch;">Beginner, Intermediate and Advanced categories
+          compete monthly — a low-stakes way to measure progress, build confidence, and reward consistent practice.</p>
+        <div class="tag-list">
+          <span class="tag">Beginner</span>
+          <span class="tag">Intermediate</span>
+          <span class="tag">Advanced</span>
+        </div>
+      </div>
+      <div>
+        <div class="eyebrow">Campus Events</div>
+        <h2 style="font-size:clamp(28px,3.6vw,38px);">Where we show up.</h2>
+        <div class="tag-list">
+            <span class="tag hot">Freshers' Skate Connect</sp
+          <span class="tag hot">August Workshop</span>
+          <span class="tag ">October Workshop</span>
+                    <span class="tag">Daily Practice</span>
+          <span class="tag">Summer Skating Camp</span>
+          <span class="tag">Games Carnival showcase</span>
+          <span class="tag">Skate-a-thon</span>
+               <span class="tag">Ranbhoomi</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="trail-divider">
+    <svg viewBox="0 0 1160 64" preserveAspectRatio="none">
+      <line class="streak" x1="0" y1="32" x2="1160" y2="32" stroke="url(#g2)" stroke-width="2" />
+      <defs>
+        <linearGradient id="g2" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#10151C" stop-opacity="0" />
+          <stop offset="35%" stop-color="#F2A342" />
+          <stop offset="70%" stop-color="#6FE7DA" />
+          <stop offset="100%" stop-color="#10151C" stop-opacity="0" />
+        </linearGradient>
+      </defs>
+    </svg>
+  </div>
+
+  <!-- SAFETY -->
+  <section id="safety">
+    <div class="wrap">
+      <div class="eyebrow">Safety</div>
+      <h2 style="font-size:clamp(32px,4vw,46px); margin-bottom:44px;">Fast is only fun<br>when it's safe.</h2>
+      <div class="safety-grid">
+        <div class="safety-item"><span class="mark">01</span><span>Helmet compulsory during every training
+            session.</span></div>
+        <div class="safety-item"><span class="mark">02</span><span>Knee and elbow guards strongly recommended.</span>
+        </div>
+        <div class="safety-item"><span class="mark">03</span><span>Pre-session warm-up before every rink hour.</span>
+        </div>
+        <div class="safety-item"><span class="mark">04</span><span>All practice sessions are supervised.</span></div>
+        <div class="safety-item"><span class="mark">05</span><span>Equipment inspected before every use.</span></div>
+        <div class="safety-item"><span class="mark">06</span><span>First-aid support on hand during events.</span></div>
+      </div>
+    </div>
+  </section>
+<!-- FAQ -->
+<section id="faq">
+  <div class="wrap">
+
+    <div class="eyebrow">FAQs</div>
+
+    <h2 style="font-size:clamp(32px,4vw,46px); margin-bottom:18px;">
+      FREQUENTLY ASKED<br>QUESTIONS.
+    </h2>
+
+    <p style="max-width:620px;color:var(--ink-dim);margin-bottom:45px;">
+      Everything you need to know before stepping onto the rink.
+    </p>
+
+    <div class="faq-container">
+
+      <details class="faq-item" open>
+        <summary>Do I need prior skating experience?</summary>
+        <p>No. Beginners are always welcome! Our coaches and coordinators will guide you from the basics.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>Are skates and safety gear provided?</summary>
+        <p>Yes. The club provides skates along with helmets and protective gear during practice sessions.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>Who can join the Skating Club?</summary>
+        <p>All IIT Kanpur students—including UG, PG, and PhD students—are welcome to join.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>When are practice sessions conducted?</summary>
+        <p>Regular practice sessions are held Monday to Saturday during the evening at the skating rink.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>What should I bring?</summary>
+        <p>Wear comfortable sports clothing and socks. The club will provide the skating equipment.</p>
+      </details>
+
+    </div>
+
+  </div>
+</section>
+  <!-- GALLERY -->
+  <section id="gallery" style="padding-bottom: 0;">
+    <div style="max-width:1160px; margin:0 auto; padding:0 32px;">
+      <div class="eyebrow">From the Rink</div>
+      <h2 style="font-size:clamp(32px,4vw,46px); margin-bottom:44px;">The club, in session.</h2>
+    </div>
+    <div class="marquee-wrapper">
+      <div class="marquee-group">
+        <img src="./assets/image1.jpeg" alt="Skating session">
+        <img src="./assets/image2.jpeg" alt="Skating session">
+        <img src="./assets/image3.jpeg" alt="Skating session">
+        <img src="./assets/group-medals.jpg" alt="Medals">
+        <img src="./assets/girls-skates.jpg" alt="Night skating">
+        <img src="./assets/night-skating-1.jpg" alt="Action shot">
+        <img src="./assets/night-skating-2.jpg" alt="Action shot">
+        <img src="./assets/podium.jpg" alt="Podium">
+      </div>
+      <div class="marquee-group" aria-hidden="true">
+        <img src="./assets/image1.jpeg" alt="Skating session">
+        <img src="./assets/image2.jpeg" alt="Skating session">
+        <img src="./assets/image3.jpeg" alt="Skating session">
+        <img src="./assets/group-medals.jpg" alt="Medals">
+        <img src="./assets/girls-skates.jpg" alt="Night skating">
+        <img src="./assets/night-skating-1.jpg" alt="Action shot">
+        <img src="./assets/night-skating-2.jpg" alt="Action shot">
+        <img src="./assets/podium.jpg" alt="Podium">
+      </div>
+    </div>
+  </section>
+
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="wrap">
+
+    <div class="eyebrow">Coordinators</div>
+
+    <h2 style="font-size:clamp(32px,4vw,46px);margin-bottom:44px;">
+      Meet the Coordinators.
+    </h2>
+
+    <div class="contact-grid">
+
+      <!-- Srinivas -->
+      <div class="contact-card">
+        <img src="./assets/tejavath-srinivas.jpeg" alt="Srinivas Tejavath" class="contact-img">
+        <h4>Srinivas Tejavath</h4>
+
+        <div class="contact-icons">
+          <a href="mailto:jejavaths24@iitk.ac.in"><i class="fa-solid fa-envelope"></i></a>
+          <a href="https://www.linkedin.com/in/tejavath-srinivas1004/" target="_blank">
+            <i class="fa-brands fa-linkedin-in"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Pankaj -->
+      <div class="contact-card">
+        <img src="./assets/pankaj-khoriya.png" alt="Pankaj Khoriya" class="contact-img">
+        <h4>Pankaj Khoriya</h4>
+
+        <div class="contact-icons">
+          <a href="mailto:kpankaj24@iitk.ac.in"><i class="fa-solid fa-envelope"></i></a>
+          <a href="https://www.linkedin.com/in/pankaj-khoriya-32826331a/" target="_blank">
+            <i class="fa-brands fa-linkedin-in"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Hema -->
+      <div class="contact-card">
+        <img src="./assets/hema-laxmi-satyasree.jpeg" alt="Hema Laxmi Satyasree" class="contact-img">
+        <h4>Hema Laxmi Satyasree</h4>
+
+        <div class="contact-icons">
+          <a href="mailto:phlakshmi24@iitk.ac.in"><i class="fa-solid fa-envelope"></i></a>
+          <a href="https://www.linkedin.com/in/hema-lakshmi-687971388/" target="_blank">
+            <i class="fa-brands fa-linkedin-in"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Farhan -->
+      <div class="contact-card">
+        <img src="./assets/farhan.jpeg" alt="Farhan Akther R" class="contact-img">
+        <h4>Farhan Akther R</h4>
+<div class="contact-icons">
+          <a href="mailto:farhanr24@iitk.ac.in"><i class="fa-solid fa-envelope"></i></a>
+          <a href="https://www.linkedin.com/in/farhan-akther-r-8ba327321/" target="_blank">
+            <i class="fa-brands fa-linkedin-in"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Tanishq -->
+<div class="contact-card center-card">
+  <img src="./assets/tanishq.jpg" alt="Tanishq Kundara" class="contact-img">
+        <h4>Tanishq Kundara</h4>
+  <div class="contact-icons">
+          <a href="mailto:tanishqk24@iitk.ac.in"><i class="fa-solid fa-envelope"></i></a>
+          <a href="https://www.linkedin.com/in/tanishq-kundara/" target="_blank">
+            <i class="fa-brands fa-linkedin-in"></i>
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+  <!-- SOCIAL MEDIA -->
+<section class="social-section">
+    <div class="wrap">
+
+        <div class="eyebrow">Stay Connected</div>
+
+        <h2>FOLLOW US</h2>
+
+        <p class="social-text">
+            Stay updated with our workshops, competitions and club activities.
+        </p>
+
+        <div class="social-icons">
+
+            <!-- Instagram -->
+                        <a href="https://www.instagram.com/skating_club_.iitk?igsh=amlrZWVsZGRjeWI1" target="_blank" title="Instagram">
+                <i class="fa-brands fa-instagram"></i>
+            </a>
+
+            <!-- Facebook -->
+            <a href="https://www.facebook.com/share/1DroMtNB4U/" target="_blank" title="Facebook">
+                <i class="fa-brands fa-facebook-f"></i>
+            </a>
+
+            <!-- LinkedIn -->
+            <a href="https://www.linkedin.com/company/skatingclubiitk/" target="_blank" title="LinkedIn">
+                <i class="fa-brands fa-linkedin-in"></i>
+            </a>
+
+        </div>
+
+    </div>
+</section>
+ <footer>
+  <div class="wrap footer-bottom">
+    <p>© Skating Club, IIT Kanpur. All Rights Reserved.</p>
+ <p>Games and Sports Council, IIT Kanpur</p>
+    <p>
+      For any queries:
+      <a href="mailto:skating_gns@iitk.ac.in">
+        skating_gns@iitk.ac.in
+      </a>
+    </p>
+
+   
+
+    <p class="developer-credit">
+      Designed & Developed by
+      <span>Srinivas Tejavath</span>
+    </p>
+  </div>
+</footer>
+
+</body>
+
+</html>
